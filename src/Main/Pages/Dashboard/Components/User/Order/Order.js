@@ -1,7 +1,7 @@
 import React from "react";
 
 function Order({ data }) {
-  const { _id, item } = data;
+  const { _id, item, count } = data;
 
   const handleDelete = (id) => {
     const check = window.confirm("Do you want to delete?");
@@ -11,6 +11,7 @@ function Order({ data }) {
   return (
     <div>
       <p>{item}</p>
+      <p>{count}</p>
       <button onClick={() => handleDelete(_id)}>delete</button>
     </div>
   );

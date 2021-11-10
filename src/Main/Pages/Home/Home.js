@@ -16,7 +16,7 @@ function Home() {
       <Navs />
       <h1>This is a home</h1>
       <ProductContainer>
-        {product.map((item) => (
+        {product.slice(0, 6).map((item) => (
           <Product key={item._id} data={item} />
         ))}
       </ProductContainer>

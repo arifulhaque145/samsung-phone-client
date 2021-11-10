@@ -28,9 +28,9 @@ function Navs() {
           <li>Register</li>
         </Link>
       ) : (
-        <Link to="/logout">
+        <a href="/">
           <li onClick={logoutUser}>Logout</li>
-        </Link>
+        </a>
       )}
     </ul>
   );

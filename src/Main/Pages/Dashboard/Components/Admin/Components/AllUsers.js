@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function DashboardHome() {
+function AllUsers() {
   const [data, setdata] = useState([]);
   useEffect(() => {
     const url = "http://localhost:5000/users";
@@ -23,7 +23,7 @@ function DashboardHome() {
 
   return (
     <div>
-      {data.map((item, i) => (
+      {data.slice(1, data.length).map((item, i) => (
         <div key={i}>
           <p>{item.email}</p>
           <button onClick={() => editUser(item._id)}>Edit</button>
@@ -34,4 +34,4 @@ function DashboardHome() {
   );
 }
 
-export default DashboardHome;
+export default AllUsers;

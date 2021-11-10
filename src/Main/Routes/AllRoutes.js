@@ -21,9 +21,9 @@ function AllRoutes() {
         <Route path="/explore">
           <Explore />
         </Route>
-        <Route path="/purchase/:id">
+        <PrivateRoute path="/purchase/:id">
           <Purchase />
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
           <Login />
         </Route>

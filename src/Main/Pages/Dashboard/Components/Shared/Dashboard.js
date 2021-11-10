@@ -1,10 +1,16 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Navs from "../../../../Components/Navs";
-import AddOrder from "../Admin/AddOrder";
-import DashNavs from "../User/DashNavs";
+import useAuth from "../../../../Hooks/useAuth";
+import AdminHome from "../Admin/AdminHome";
+import AddProduct from "../Admin/Components/AddProduct";
+import AdminDash from "../Admin/Components/AdminDash";
+import AllOrders from "../Admin/Components/AllOrders";
+import AllUsers from "../Admin/Components/AllUsers";
+import MakeAdmin from "../Admin/Components/MakeAdmin";
+import DashboardHome from "../User/Dashboard/DashboardHome";
+import DashNavs from "../User/Dashboard/DashNavs";
 import EditUser from "../User/Order/MyOrder";
-import DashboardHome from "../../DashboardHome";
 import Payment from "./Payment";
 import Review from "./Review/Review";
 
@@ -14,10 +20,12 @@ function Dashboard() {
   return (
     <>
       <Navs />
+      <AdminDash />
       <DashNavs />
       <Switch>
         <Route exact path={path}>
           <DashboardHome />
+          <AdminHome />
         </Route>
         <Route path={`${path}/myorders`}>
           <EditUser />
@@ -28,8 +36,17 @@ function Dashboard() {
         <Route path={`${path}/payment`}>
           <Payment />
         </Route>
-        <Route path={`${path}/logout`}>
-          <AddOrder />
+        <Route path={`${path}/allusers`}>
+          <AllUsers />
+        </Route>
+        <Route path={`${path}/allorders`}>
+          <AllOrders />
+        </Route>
+        <Route path={`${path}/addproduct`}>
+          <AddProduct />
+        </Route>
+        <Route path={`${path}/makeadmin`}>
+          <MakeAdmin />
         </Route>
         {/* <AdminRoute path={`${path}/makeAdmin`}>
           <MakeAdmin></MakeAdmin>
