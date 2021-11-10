@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import Navs from "../../Components/Navs";
-import AddOrder from "./Components/AddOrder";
-import DashboardHome from "./Components/DashboardHome";
-import DashNavs from "./Components/DashNavs";
-import EditUser from "./Components/MyOrder";
-import Review from "./Components/Review";
-import Payment from "./Components/Payment";
+import Navs from "../../../../Components/Navs";
+import AddOrder from "../Admin/AddOrder";
+import DashNavs from "../User/DashNavs";
+import EditUser from "../User/Order/MyOrder";
+import DashboardHome from "../../DashboardHome";
+import Payment from "./Payment";
+import Review from "./Review/Review";
 
 function Dashboard() {
   let { path } = useRouteMatch();

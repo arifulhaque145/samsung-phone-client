@@ -14,8 +14,15 @@ function Purchase() {
 
   const placeOrder = () => {
     const url = `http://localhost:5000/orders`;
-    const data = {name: 'hello'}
-    fetch(url, { method: "put", headers: "content-type: appication/json" }, body: JSON.stringify(data))
+    const { displayName, email } = user;
+    const { name } = purchaseData;
+
+    const data = { item: name, name: displayName, email };
+    fetch(url, {
+      method: "put",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
       .then((res) => res.json())
       .then((data) => setPurchaseData(data));
     console.log("Order successfully placed");
