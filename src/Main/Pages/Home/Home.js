@@ -14,12 +14,15 @@ function Home() {
   return (
     <>
       <Navs />
-      <h1>This is a home</h1>
+      <h1>Banner</h1>
       <ProductContainer>
         {product.slice(0, 6).map((item) => (
           <Product key={item._id} data={item} />
         ))}
       </ProductContainer>
+      <h1>Review</h1>
+      <h1>Contact Us</h1>
+      <h1>Footer</h1>
     </>
   );
 }

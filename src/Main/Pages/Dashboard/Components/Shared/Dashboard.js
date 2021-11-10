@@ -16,6 +16,9 @@ import Review from "./Review/Review";
 
 function Dashboard() {
   let { path } = useRouteMatch();
+  const { user } = useAuth();
+
+  console.log(user);
 
   return (
     <>
