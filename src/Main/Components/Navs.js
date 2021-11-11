@@ -4,8 +4,8 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { Link } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import { Links } from "../styles";
 
 function Navs() {
   const { user, logoutUser } = useAuth();
@@ -18,37 +18,51 @@ function Navs() {
             Samsung BD
           </Typography>
           <Box sx={{ display: "flex" }}>
-            <Link to="/">
+            <Links to="/">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Home
               </Typography>
-            </Link>
-            <Link to="/explore">
+            </Links>
+            <Links to="/explore">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Explore
               </Typography>
-            </Link>
-            <Link to="/dashboard">
+            </Links>
+            <Links to="/dashboard">
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Dashboard
               </Typography>
-            </Link>
+            </Links>
             {!user?.email ? (
-              <Link to="/login">
-                <Button color="inherit">Login</Button>
-              </Link>
+              <Links to="/login">
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: "white", color: "blue" }}
+                >
+                  Login
+                </Button>
+              </Links>
             ) : (
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 {user?.displayName}
               </Typography>
             )}
             {!user?.email ? (
-              <Link to="/register">
-                <Button color="inherit">Register</Button>
-              </Link>
+              <Links to="/register">
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: "white", color: "blue" }}
+                >
+                  Register
+                </Button>
+              </Links>
             ) : (
               <a href="/">
-                <Button onClick={logoutUser} color="inherit">
+                <Button
+                  onClick={logoutUser}
+                  variant="contained"
+                  sx={{ backgroundColor: "white", color: "blue" }}
+                >
                   Logout
                 </Button>
               </a>

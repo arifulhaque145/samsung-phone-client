@@ -1,16 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Paper from "@mui/material/Paper";
+import { Button, CardActionArea, CardActions } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import { LinkButton } from "../../../styles";
 
 function Product({ data }) {
   const { _id, name, price } = data;
 
   return (
-    <Paper elevation={3}>
-      <h1>{name}</h1>
-      <p>{price}</p>
-      <Link to={`/purchase/${_id}`}>Order</Link>
-    </Paper>
+    <Card sx={{ width: 300, m: 2, textAlign: "center" }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image="https://www.mobiledokan.co/wp-content/uploads/2019/05/Symphony-V85.jpg"
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ textTransform: "capitalize" }}
+          >
+            {name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            TK. {price}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions sx={{ justifyContent: "center" }}>
+        <LinkButton to={`/purchase/${_id}`}>
+          <Button size="small" color="primary">
+            order
+          </Button>
+        </LinkButton>
+      </CardActions>
+    </Card>
   );
 }
 
