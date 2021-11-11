@@ -19,7 +19,6 @@ function Login() {
   const { googleAccount, loginUser } = useAuth();
 
   const onSubmit = (data) => {
-    console.log(data);
     loginUser(data.email, data.password);
     history.replace(destination);
   };

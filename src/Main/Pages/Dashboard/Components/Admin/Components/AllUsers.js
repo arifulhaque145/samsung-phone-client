@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import useAuth from "../../../../../Hooks/useAuth";
 
 function AllUsers() {
   const [data, setdata] = useState([]);
+  const { deleteNewUser } = useAuth();
+
   useEffect(() => {
     const url = "http://localhost:5000/users";
     fetch(url)
@@ -15,8 +18,17 @@ function AllUsers() {
     });
   };
 
-  const deleteUser = (id) => {
+  const deleteUser = (id, email, uid) => {
+    deleteNewUser(uid);
     fetch("http://localhost:5000/users/" + id, {
+      method: "delete",
+    });
+
+    fetch("http://localhost:5000/order/" + email, {
+      method: "delete",
+    });
+
+    fetch("http://localhost:5000/review/" + email, {
       method: "delete",
     });
   };
@@ -27,7 +39,7 @@ function AllUsers() {
         <div key={i}>
           <p>{item.email}</p>
           <button onClick={() => editUser(item._id)}>Edit</button>
-          <button onClick={() => deleteUser(item._id)}>Delete</button>
+          <button onClick={() => deleteUser(item._id, item.email, item.uid)}>Delete</button>
         </div>
       ))}
     </div>

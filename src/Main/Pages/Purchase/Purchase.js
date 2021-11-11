@@ -5,7 +5,6 @@ import useAuth from "../../Hooks/useAuth";
 function Purchase() {
   const { id } = useParams();
   const { user } = useAuth();
-  const [count, setCount] = useState(0);
   const [purchaseData, setPurchaseData] = useState({});
 
   const url = `http://localhost:5000/products/${id}`;
@@ -18,22 +17,23 @@ function Purchase() {
     const { displayName, email } = user;
     const { name } = purchaseData;
 
-    fetch(`http://localhost:5000/orders/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCount(data.count));
+    // fetch(`http://localhost:5000/orders?email=${email}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {});
 
-    const data = {
+    const datas = {
       itemid: id,
       item: name,
       name: displayName,
       email,
-      count: count,
+      count: 1,
       status: "pending",
     };
+
     fetch(url, {
-      method: "put",
+      method: "post",
       headers: { "content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(datas),
     })
       .then((res) => res.json())
       .then((data) => setPurchaseData(data));

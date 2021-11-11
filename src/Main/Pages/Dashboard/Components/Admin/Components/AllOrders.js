@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import OrderCard from "./Orders/OrderCard";
 
 function AllOrders() {
   const [data, setdata] = useState([]);
@@ -13,7 +14,7 @@ function AllOrders() {
     <div>
       <h1>Orders</h1>
       {data.map((items) => (
-        <p>{items.item}</p>
+        <OrderCard key={items._id} data={items} />
       ))}
     </div>
   );

@@ -10,28 +10,24 @@ import AllUsers from "../Admin/Components/AllUsers";
 import MakeAdmin from "../Admin/Components/MakeAdmin";
 import DashboardHome from "../User/Dashboard/DashboardHome";
 import DashNavs from "../User/Dashboard/DashNavs";
-import EditUser from "../User/Order/MyOrder";
+import MyOrder from "../User/Order/MyOrder";
 import Payment from "./Payment";
 import Review from "./Review/Review";
 
 function Dashboard() {
   let { path } = useRouteMatch();
-  const { user } = useAuth();
-
-  console.log(user);
+  const { checkUser } = useAuth();
 
   return (
     <>
       <Navs />
-      <AdminDash />
-      <DashNavs />
+      {checkUser?.role === "admin" ? <AdminDash /> : <DashNavs />}
       <Switch>
         <Route exact path={path}>
-          <DashboardHome />
-          <AdminHome />
+          {checkUser?.role === "admin" ? <AdminHome /> : <DashboardHome />}
         </Route>
         <Route path={`${path}/myorders`}>
-          <EditUser />
+          <MyOrder />
         </Route>
         <Route path={`${path}/review`}>
           <Review />

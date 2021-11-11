@@ -22,7 +22,6 @@ function Register() {
       return;
     }
     registerAccount(name, email, password, history);
-    console.log(data);
   };
 
   return (

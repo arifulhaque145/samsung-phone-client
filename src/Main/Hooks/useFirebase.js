@@ -16,6 +16,7 @@ initalizeApp();
 const useFirebase = () => {
   // SPECIAL STATES
   const [user, setUser] = useState({});
+  const [checkUser, setCheckUser] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,8 +30,13 @@ const useFirebase = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        setUser(user);
-        saveUser(user.displayName, user.email, (user.password = ""), "put");
+        saveUser(
+          user.uid,
+          user.displayName,
+          user.email,
+          (user.password = ""),
+          "put"
+        );
         const destination = location?.state?.from || "/";
         history.replace(destination);
       })
@@ -46,10 +52,15 @@ const useFirebase = () => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        const newUser = { displayName: name, email, password };
-        console.log(newUser);
-        setUser(user);
-        saveUser(newUser.displayName, newUser.email, newUser.password, "put");
+        const uid = result.user.uid;
+        const newUser = { uid, displayName: name, email, password };
+        saveUser(
+          uid,
+          newUser.displayName,
+          newUser.email,
+          newUser.password,
+          "put"
+        );
         updateProfile(auth.currentUser, {
           displayName: name,
         });
@@ -67,8 +78,10 @@ const useFirebase = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
+        setUser(userCredential.user);
+        fetch(`http://localhost:5000/users/${userCredential.user.uid}`)
+          .then((res) => res.json())
+          .then((data) => setCheckUser(data));
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -90,6 +103,10 @@ const useFirebase = () => {
       .finally(setIsLoading(true));
   };
 
+  const deleteNewUser = (id) => {
+    console.log(id, "Work in process....");
+  };
+
   // watch over user
   useEffect(() => {
     setIsLoading(true);
@@ -102,13 +119,14 @@ const useFirebase = () => {
     return unsubscribe;
   }, [auth]);
 
-  const saveUser = (displayName, email, password, method) => {
-    const user = { displayName, email, password, role: "member" };
+  const saveUser = (uid, displayName, email, password, method) => {
+    const user = { uid, displayName, email, password, role: "member" };
     fetch("http://localhost:5000/users", {
       method: method,
       headers: { "content-type": "application/json" },
       body: JSON.stringify(user),
     });
+    setCheckUser(user);
   };
 
   return {
@@ -119,6 +137,8 @@ const useFirebase = () => {
     googleAccount,
     loginUser,
     logoutUser,
+    deleteNewUser,
+    checkUser,
   };
 };
 
