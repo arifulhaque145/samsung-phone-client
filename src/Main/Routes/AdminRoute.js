@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 
 const AdminRoute = ({ children, ...rest }) => {
-  const { user, admin, isLoading } = useAuth();
+  const { checkUser, isLoading } = useAuth();
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -12,7 +12,7 @@ const AdminRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) =>
-        user.email && admin ? (
+        checkUser?.role === "admin" ? (
           children
         ) : (
           <Redirect

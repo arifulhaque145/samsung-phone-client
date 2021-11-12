@@ -1,6 +1,11 @@
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Toolbar from "@mui/material/Toolbar";
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import useAuth from "../../../../../Hooks/useAuth";
+import { LinkTab } from "../../../../../styles";
 
 function DashNavs() {
   let { url } = useRouteMatch();
@@ -8,21 +13,23 @@ function DashNavs() {
 
   return (
     <>
+      <Toolbar />
+      <Divider />
       <li>User</li>
-      <ul>
-        <Link to={`${url}/myorders`}>
-          <li>My Orders</li>
-        </Link>
-        <Link to={`${url}/review`}>
-          <li>Review</li>
-        </Link>
-        <Link to={`${url}/payment`}>
-          <li>Payment</li>
-        </Link>
+      <ListItem>
+        <LinkTab to={`${url}/myorders`}>
+          <ListItemText primary="My Orders" />
+        </LinkTab>
+        <LinkTab to={`${url}/review`}>
+          <ListItemText primary="Review" />
+        </LinkTab>
+        <LinkTab to={`${url}/payment`}>
+          <ListItemText primary="Payment" />
+        </LinkTab>
         <a href="/">
           <li onClick={logoutUser}>Logout</li>
         </a>
-      </ul>
+      </ListItem>
     </>
   );
 }

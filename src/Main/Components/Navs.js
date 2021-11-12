@@ -11,63 +11,63 @@ function Navs() {
   const { user, logoutUser } = useAuth();
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1, textTransform: "uppercase" }}>
+      <AppBar position="fixed" sx={{ bgcolor: "text.primary" }}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
             Samsung BD
           </Typography>
-          <Box sx={{ display: "flex" }}>
-            <Links to="/">
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Home
-              </Typography>
+          <Links to="/">
+            <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
+              Home
+            </Typography>
+          </Links>
+          <Links to="/explore">
+            <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
+              Explore
+            </Typography>
+          </Links>
+          <Links to="/dashboard">
+            <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
+              Dashboard
+            </Typography>
+          </Links>
+          {!user?.email ? (
+            <Links to="/login">
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "white", color: "blue" }}
+              >
+                Login
+              </Button>
             </Links>
-            <Links to="/explore">
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Explore
-              </Typography>
-            </Links>
-            <Links to="/dashboard">
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                Dashboard
-              </Typography>
-            </Links>
-            {!user?.email ? (
-              <Links to="/login">
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "white", color: "blue" }}
-                >
-                  Login
-                </Button>
-              </Links>
-            ) : (
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          ) : (
+            <Links to="#">
+              <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
                 {user?.displayName}
               </Typography>
-            )}
-            {!user?.email ? (
-              <Links to="/register">
-                <Button
-                  variant="contained"
-                  sx={{ backgroundColor: "white", color: "blue" }}
-                >
-                  Register
-                </Button>
-              </Links>
-            ) : (
-              <a href="/">
-                <Button
-                  onClick={logoutUser}
-                  variant="contained"
-                  sx={{ backgroundColor: "white", color: "blue" }}
-                >
-                  Logout
-                </Button>
-              </a>
-            )}
-          </Box>
+            </Links>
+          )}
+          {!user?.email ? (
+            <Links to="/register">
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "white", color: "blue" }}
+              >
+                Register
+              </Button>
+            </Links>
+          ) : (
+            <a href="/" style={{ textDecoration: "none" }}>
+              <Button
+                onClick={logoutUser}
+                variant="contained"
+                sx={{ backgroundColor: "white", color: "blue" }}
+              >
+                Logout
+              </Button>
+            </a>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

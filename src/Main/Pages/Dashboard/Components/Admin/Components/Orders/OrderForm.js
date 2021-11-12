@@ -1,3 +1,5 @@
+import { Button, MenuItem, Select } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -9,20 +11,20 @@ function OrderForm({ newData }) {
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    // console.log(newData);
   };
 
   return (
-    <div>
-      <h1>This is order form</h1>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <select {...register("status")}>
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-        </select>
-        <input type="submit" />
+        <Select defaultValue="pending" {...register("status")}>
+          <MenuItem value="pending">Pending</MenuItem>
+          <MenuItem value="approved">Approved</MenuItem>
+        </Select>
+        <Button type="submit">Submit</Button>
       </form>
-    </div>
+    </Box>
   );
 }
 

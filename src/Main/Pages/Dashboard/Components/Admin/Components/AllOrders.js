@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import OrderCard from "./Orders/OrderCard";
 
@@ -11,12 +12,12 @@ function AllOrders() {
   }, [data]);
 
   return (
-    <div>
+    <Box>
       <h1>Orders</h1>
       {data.map((items) => (
         <OrderCard key={items._id} data={items} />
       ))}
-    </div>
+    </Box>
   );
 }
 
