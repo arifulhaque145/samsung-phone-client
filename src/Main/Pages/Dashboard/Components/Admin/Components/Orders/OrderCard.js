@@ -3,7 +3,7 @@ import React from "react";
 import OrderForm from "./OrderForm";
 
 function OrderCard({ data }) {
-  const { item, email, status } = data;
+  const { item, name, status } = data;
 
   return (
     <Grid
@@ -13,7 +13,7 @@ function OrderCard({ data }) {
     >
       <Grid xs={2} sm={4} md={3} sx={{ my: 1, alignItems: "center" }}>
         <Typography variant="body1" display="block" gutterBottom sx={{ p: 2 }}>
-          {email}
+          {name}
         </Typography>
       </Grid>
       <Grid xs={2} sm={4} md={3} sx={{ my: 1 }}>
@@ -26,7 +26,7 @@ function OrderCard({ data }) {
           variant="button"
           display="block"
           gutterBottom
-          sx={{ p: 2, color: status === "approved" && "green" }}
+          sx={{ p: 2, color: status === "approved" ? "green" : "red" }}
         >
           {status}
         </Typography>
