@@ -1,7 +1,8 @@
+import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 
 function Order({ data }) {
-  const { _id, item, count } = data;
+  const { _id, item, status, name } = data;
 
   const handleDelete = (id) => {
     const check = window.confirm("Do you want to delete?");
@@ -9,11 +10,34 @@ function Order({ data }) {
   };
 
   return (
-    <div>
-      <p>{item}</p>
-      <p>{count}</p>
-      <button onClick={() => handleDelete(_id)}>delete</button>
-    </div>
+    <Grid
+      container
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      sx={{ boxShadow: 2, my: 2, p: 2 }}
+    >
+      <Grid item xs={2} sm={4} md={3} sx={{pt: 1}}>
+        <Typography variant="body1">{_id}</Typography>
+      </Grid>
+      <Grid item xs={2} sm={4} md={3} sx={{pt: 1}}>
+        <Typography variant="body1">{item}</Typography>
+      </Grid>
+      <Grid item xs={2} sm={4} md={3} sx={{pt: 1}}>
+        <Typography
+          variant="body1"
+          sx={{
+            textTransform: "uppercase",
+            color: status === "approved" ? "green" : "red",
+          }}
+        >
+          {status}
+        </Typography>
+      </Grid>
+      <Grid item xs={2} sm={4} md={3}>
+        <Button variant="outlined" onClick={() => handleDelete(_id)}>
+          delete
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
 

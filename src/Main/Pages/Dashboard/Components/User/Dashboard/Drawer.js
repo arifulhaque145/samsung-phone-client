@@ -80,19 +80,19 @@ function ResponsiveDrawer(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push(`${path}/myorders`)}>
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>
           <ListItemText primary={"My Orders"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push(`${path}/review`)}>
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>
           <ListItemText primary={"Review"} />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push(`${path}/payment`)}>
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>

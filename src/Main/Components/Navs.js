@@ -27,11 +27,11 @@ function Navs() {
               Explore
             </Typography>
           </Links>
-          <Links to="/dashboard">
+          {user?.email && <Links to="/dashboard">
             <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
-          </Links>
+          </Links>}
           {!user?.email ? (
             <Links to="/login">
               <Button
