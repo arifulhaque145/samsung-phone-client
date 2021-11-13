@@ -18,7 +18,7 @@ function ReviewForm() {
   const onSubmit = (data) => {
     const { displayName, email } = user;
     const review = { displayName, email, rating, ...data };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://quiet-savannah-39001.herokuapp.com/reviews", {
       method: "put",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),

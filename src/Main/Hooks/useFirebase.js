@@ -18,7 +18,7 @@ const useFirebase = () => {
   const [user, setUser] = useState({});
   const [checkUser, setCheckUser] = useState({});
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Auth
   const auth = getAuth();
@@ -80,9 +80,6 @@ const useFirebase = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
-        fetch(`http://localhost:5000/users/${userCredential.user.uid}`)
-          .then((res) => res.json())
-          .then((data) => setCheckUser(data));
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -108,26 +105,32 @@ const useFirebase = () => {
     console.log(id, "Work in process....");
   };
 
+  useEffect(() => {
+    fetch(`https://quiet-savannah-39001.herokuapp.com/users/${user.uid}`)
+      .then((res) => res.json())
+      .then((data) => setCheckUser(data));
+  }, [user.uid]);
+
   // watch over user
   useEffect(() => {
-    setIsLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        setIsLoading(false);
+      } else {
+        setUser({});
       }
+      setIsLoading(false);
     });
-    return unsubscribe;
+    return () => unsubscribed;
   }, [auth]);
 
   const saveUser = (uid, displayName, email, password, method) => {
     const user = { uid, displayName, email, password, role: "member" };
-    fetch("http://localhost:5000/users", {
+    fetch("https://quiet-savannah-39001.herokuapp.com/users", {
       method: method,
       headers: { "content-type": "application/json" },
       body: JSON.stringify(user),
     });
-    setCheckUser(user);
   };
 
   return {

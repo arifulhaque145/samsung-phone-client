@@ -8,7 +8,9 @@ function MyOrder() {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/order?email=${user.email}`)
+    fetch(
+      `https://quiet-savannah-39001.herokuapp.com/order?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [orders]);

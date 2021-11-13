@@ -6,7 +6,10 @@ function Order({ data }) {
 
   const handleDelete = (id) => {
     const check = window.confirm("Do you want to delete?");
-    check && fetch(`http://localhost:5000/orders/${id}`, { method: "delete" });
+    check &&
+      fetch(`https://quiet-savannah-39001.herokuapp.com/orders/${id}`, {
+        method: "delete",
+      });
   };
 
   return (

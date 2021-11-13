@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 function OrderForm({ newData }) {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    fetch(`http://localhost:5000/orders/${newData._id}`, {
+    fetch(`https://quiet-savannah-39001.herokuapp.com/orders/${newData._id}`, {
       method: "put",
       headers: { "content-Type": "application/json" },
       body: JSON.stringify(data),

@@ -11,7 +11,7 @@ function Review() {
 
   useEffect(() => {
     setLoader(true);
-    fetch("http://localhost:5000/reviews")
+    fetch("https://quiet-savannah-39001.herokuapp.com/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
     setLoader(false);

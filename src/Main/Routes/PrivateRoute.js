@@ -5,14 +5,14 @@ import useAuth from "../Hooks/useAuth";
 function PrivateRoute({ children, ...rest }) {
   const { user, isLoading } = useAuth();
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        user?.email ? (
+        user.email ? (
           children
         ) : (
           <Redirect

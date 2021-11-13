@@ -8,15 +8,15 @@ function UserCard({ data }) {
 
   const deleteUser = (id, email, uid) => {
     deleteNewUser(uid);
-    fetch("http://localhost:5000/users/" + id, {
+    fetch("https://quiet-savannah-39001.herokuapp.com/users/" + id, {
       method: "delete",
     });
 
-    fetch("http://localhost:5000/order/" + email, {
+    fetch("https://quiet-savannah-39001.herokuapp.com/order/" + email, {
       method: "delete",
     });
 
-    fetch("http://localhost:5000/review/" + email, {
+    fetch("https://quiet-savannah-39001.herokuapp.com/review/" + email, {
       method: "delete",
     });
   };

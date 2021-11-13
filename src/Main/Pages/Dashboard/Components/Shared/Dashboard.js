@@ -18,49 +18,47 @@ import Review from "./Review/Review";
 
 function Dashboard() {
   let { path } = useRouteMatch();
-  const { user, isLoading } = useAuth();
+  const { isLoading } = useAuth();
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return (
     <>
-      {user?.email && (
-        <Box sx={{ display: "flex" }}>
-          <Divider />
-          <List>
-            <Switch>
-              <PrivateRoute exact path={path}>
-                <DashboardHome />
-              </PrivateRoute>
-              <AdminRoute exact path={path}>
-                <AdminHome />
-              </AdminRoute>
-              <PrivateRoute path={`${path}/myorders`}>
-                <MyOrder />
-              </PrivateRoute>
-              <PrivateRoute path={`${path}/review`}>
-                <Review />
-              </PrivateRoute>
-              <PrivateRoute path={`${path}/payment`}>
-                <Payment />
-              </PrivateRoute>
-              <AdminRoute path={`${path}/allusers`}>
-                <AllUsers />
-              </AdminRoute>
-              <AdminRoute path={`${path}/allorders`}>
-                <AllOrders />
-              </AdminRoute>
-              <AdminRoute path={`${path}/addproduct`}>
-                <AddProduct />
-              </AdminRoute>
-              <AdminRoute path={`${path}/makeadmin`}>
-                <MakeAdmin />
-              </AdminRoute>
-            </Switch>
-          </List>
-        </Box>
-      )}
+      <Box sx={{ display: "flex" }}>
+        <Divider />
+        <List>
+          <Switch>
+            <PrivateRoute exact path={path}>
+              <DashboardHome />
+            </PrivateRoute>
+            <AdminRoute exact path={path}>
+              <AdminHome />
+            </AdminRoute>
+            <PrivateRoute path={`${path}/myorders`}>
+              <MyOrder />
+            </PrivateRoute>
+            <PrivateRoute path={`${path}/review`}>
+              <Review />
+            </PrivateRoute>
+            <PrivateRoute path={`${path}/payment`}>
+              <Payment />
+            </PrivateRoute>
+            <AdminRoute path={`${path}/allusers`}>
+              <AllUsers />
+            </AdminRoute>
+            <AdminRoute path={`${path}/allorders`}>
+              <AllOrders />
+            </AdminRoute>
+            <AdminRoute path={`${path}/addproduct`}>
+              <AddProduct />
+            </AdminRoute>
+            <AdminRoute path={`${path}/makeadmin`}>
+              <MakeAdmin />
+            </AdminRoute>
+          </Switch>
+        </List>
+      </Box>
     </>
   );
 }

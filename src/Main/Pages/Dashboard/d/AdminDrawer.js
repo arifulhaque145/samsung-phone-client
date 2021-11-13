@@ -1,5 +1,4 @@
 import MailIcon from "@mui/icons-material/Mail";
-import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -12,41 +11,22 @@ import Toolbar from "@mui/material/Toolbar";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { Switch, useHistory, useRouteMatch } from "react-router-dom";
-import useAuth from "../../../../../Hooks/useAuth";
-import PrivateRoute from "../../../../../Routes/PrivateRoute";
-import AdminHome from "../../Admin/AdminHome";
-import AddProduct from "../../Admin/Components/AddProduct";
-import AllOrders from "../../Admin/Components/AllOrders";
-import AllUsers from "../../Admin/Components/AllUsers";
-import MakeAdmin from "../../Admin/Components/MakeAdmin";
-import Payment from "../../Shared/Payment";
-import Review from "../../Shared/Review/Review";
-import MyOrder from "../../User/Order/MyOrder";
-import DashboardHome from "./DashboardHome";
+import useAuth from "../../../Hooks/useAuth";
+import AdminRoute from "../../../Routes/AdminRoute";
+import AdminHome from "../Components/Admin/AdminHome";
+import AddProduct from "../Components/Admin/Components/AddProduct";
+import AllOrders from "../Components/Admin/Components/AllOrders";
+import AllUsers from "../Components/Admin/Components/AllUsers";
+import MakeAdmin from "../Components/Admin/Components/MakeAdmin";
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function AdminDrawer(props) {
   let { path } = useRouteMatch();
-  const { checkUser, isLoading, logoutUser } = useAuth();
+  const { logoutUser } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const history = useHistory();
-
-  if (isLoading) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: 100,
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -55,33 +35,39 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider />
-      <List>
-        <ListItem button onClick={() => history.push(`${path}/myorders`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"My Orders"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/review`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Review"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/payment`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Payment"} />
-        </ListItem>
-        <ListItem button onClick={logoutUser}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Logout"} />
-        </ListItem>
-      </List>
+          <Divider />
+          <List>
+            <ListItem button onClick={() => history.push(`${path}/makeadmin`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Make Admin"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/allusers`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"All Users"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/allorders`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"All Orders"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Product"} />
+            </ListItem>
+            <ListItem button onClick={logoutUser}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItem>
+          </List>
     </div>
   );
 
@@ -138,26 +124,29 @@ function ResponsiveDrawer(props) {
       >
         <Toolbar />
         <Switch>
-          <PrivateRoute exact path={path}>
-            <DashboardHome />
-          </PrivateRoute>
-          <PrivateRoute path={`${path}/myorders`}>
-            <MyOrder />
-          </PrivateRoute>
-          <PrivateRoute path={`${path}/review`}>
-            <Review />
-          </PrivateRoute>
-          <PrivateRoute path={`${path}/payment`}>
-            <Payment />
-          </PrivateRoute>
+          <AdminRoute exact path={path}>
+            <AdminHome />
+          </AdminRoute>
+          <AdminRoute path={`${path}/allusers`}>
+            <AllUsers />
+          </AdminRoute>
+          <AdminRoute path={`${path}/allorders`}>
+            <AllOrders />
+          </AdminRoute>
+          <AdminRoute path={`${path}/addproduct`}>
+            <AddProduct />
+          </AdminRoute>
+          <AdminRoute path={`${path}/makeadmin`}>
+            <MakeAdmin />
+          </AdminRoute>
         </Switch>
       </Box>
     </Box>
   );
 }
 
-ResponsiveDrawer.propTypes = {
+AdminDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+export default AdminDrawer;

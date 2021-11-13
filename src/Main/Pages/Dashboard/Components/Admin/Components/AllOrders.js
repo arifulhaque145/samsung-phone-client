@@ -5,7 +5,7 @@ import OrderCard from "./Orders/OrderCard";
 function AllOrders() {
   const [data, setdata] = useState([]);
   useEffect(() => {
-    const url = "http://localhost:5000/orders";
+    const url = "https://quiet-savannah-39001.herokuapp.com/orders";
     fetch(url)
       .then((res) => res.json())
       .then((data) => setdata(data));

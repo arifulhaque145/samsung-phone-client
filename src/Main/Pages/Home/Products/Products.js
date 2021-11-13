@@ -9,7 +9,7 @@ function Products() {
 
   useEffect(() => {
     setLoader(true);
-    fetch("http://localhost:5000/products")
+    fetch("https://quiet-savannah-39001.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => setProduct(data));
     setLoader(false);

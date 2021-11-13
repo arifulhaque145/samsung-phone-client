@@ -1,6 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
@@ -8,7 +9,21 @@ import useAuth from "../Hooks/useAuth";
 import { Links } from "../styles";
 
 function Navs() {
-  const { user, logoutUser } = useAuth();
+  const { user, isLoading, logoutUser } = useAuth();
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: 100,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ flexGrow: 1, textTransform: "uppercase" }}>
@@ -45,7 +60,11 @@ function Navs() {
             </Links>
           ) : (
             <Links to="#">
-              <Typography variant="button" component="div" sx={{ flexGrow: 1, mr: 2 }}>
+              <Typography
+                variant="button"
+                component="div"
+                sx={{ flexGrow: 1, mr: 2 }}
+              >
                 {user?.displayName}
               </Typography>
             </Links>

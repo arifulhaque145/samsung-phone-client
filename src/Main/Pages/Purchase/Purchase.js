@@ -7,13 +7,13 @@ function Purchase() {
   const { user } = useAuth();
   const [purchaseData, setPurchaseData] = useState({});
 
-  const url = `http://localhost:5000/products/${id}`;
+  const url = `https://quiet-savannah-39001.herokuapp.com/products/${id}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => setPurchaseData(data));
 
   const placeOrder = () => {
-    const url = `http://localhost:5000/orders`;
+    const url = `https://quiet-savannah-39001.herokuapp.com/orders`;
     const { displayName, email } = user;
     const { name } = purchaseData;
 

@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navs from "../Components/Navs";
+import useAuth from "../Hooks/useAuth";
 import ResponsiveDrawer from "../Pages/Dashboard/Components/User/Dashboard/Drawer";
+import AdminDrawer from "../Pages/Dashboard/d/AdminDrawer";
 import Explore from "../Pages/Explore/Explore";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -10,6 +12,13 @@ import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 
 function AllRoutes() {
+  const { checkUser, isLoading } = useAuth();
+  // const [value, setValue] = React.useState({});
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Router>
       <Navs />
@@ -18,11 +27,11 @@ function AllRoutes() {
           <Home />
         </Route>
         <PrivateRoute path="/dashboard">
-          <ResponsiveDrawer />
+          {checkUser.role === "member" ? <ResponsiveDrawer /> : <AdminDrawer />}
         </PrivateRoute>
-        <Route path="/explore">
+        <PrivateRoute path="/explore">
           <Explore />
-        </Route>
+        </PrivateRoute>
         <PrivateRoute path="/purchase/:id">
           <Purchase />
         </PrivateRoute>
