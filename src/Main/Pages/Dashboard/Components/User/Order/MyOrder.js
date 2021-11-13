@@ -11,7 +11,7 @@ function MyOrder() {
     fetch(`http://localhost:5000/order?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setOrders(data));
-  }, [user.email]);
+  }, [orders]);
 
   return (
     <Box>

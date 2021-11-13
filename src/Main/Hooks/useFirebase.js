@@ -37,6 +37,7 @@ const useFirebase = () => {
           (user.password = ""),
           "put"
         );
+
         const destination = location?.state?.from || "/";
         history.replace(destination);
       })
@@ -64,7 +65,7 @@ const useFirebase = () => {
         updateProfile(auth.currentUser, {
           displayName: name,
         });
-        history.replace("/");
+        history.push("/login");
       })
       .catch((error) => {
         const errorMessage = error.message;

@@ -8,9 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 
 function Login() {
   const location = useLocation();
-  const history = useHistory();
-
-  const destination = location?.state?.from;
+  const history = useHistory()
 
   const {
     register,
@@ -22,7 +20,7 @@ function Login() {
 
   const onSubmit = (data) => {
     loginUser(data.email, data.password);
-    history.replace(destination);
+    history.push("/");
   };
 
   const googleSignIn = () => {

@@ -7,7 +7,7 @@ import * as React from "react";
 import { LinkButton } from "../../../styles";
 
 function Product({ data }) {
-  const { _id, name, price } = data;
+  const { _id, name, price, img } = data;
 
   return (
     <Card sx={{ width: 300, m: 2, textAlign: "center" }}>
@@ -15,13 +15,14 @@ function Product({ data }) {
         <CardMedia
           component="img"
           height="140"
-          image="https://www.mobiledokan.co/wp-content/uploads/2019/05/Symphony-V85.jpg"
+          image={img}
           alt="green iguana"
+          sx={{py: 2}}
         />
         <CardContent>
           <Typography
             gutterBottom
-            variant="h5"
+            variant="h6"
             component="div"
             sx={{ textTransform: "capitalize" }}
           >

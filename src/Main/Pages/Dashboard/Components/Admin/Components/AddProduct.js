@@ -1,17 +1,22 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function AddProduct() {
+  const [alert, setAlert] = useState(false);
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
-    // fetch("http://localhost:5000/products", {
-    //   method: "put",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
-    console.log(data);
+    fetch("http://localhost:5000/products", {
+      method: "put",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 2000);
   };
 
   return (
@@ -21,10 +26,10 @@ function AddProduct() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        my: 8
+        my: 8,
       }}
     >
-      <Typography variant="h5" gutterBottom component="div" sx={{mb: 4}}>
+      <Typography variant="h5" gutterBottom component="div" sx={{ mb: 4 }}>
         Add Product
       </Typography>
       <form
@@ -64,6 +69,11 @@ function AddProduct() {
           </Button>
         </Box>
       </form>
+      {alert && (
+        <Alert sx={{ width: "50%", my: 2 }} severity="success">
+          New Product Added
+        </Alert>
+      )}
     </Box>
   );
 }
