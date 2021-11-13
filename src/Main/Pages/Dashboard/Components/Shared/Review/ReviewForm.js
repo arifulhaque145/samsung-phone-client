@@ -1,8 +1,13 @@
-import React from "react";
+import StarIcon from "@mui/icons-material/Star";
+import { Alert, Button, Rating, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../../Hooks/useAuth";
 
 function ReviewForm() {
+  const [alert, setAlert] = useState(false);
+  const [rating, setRating] = useState(0);
   const { user } = useAuth();
   const {
     register,
@@ -12,25 +17,54 @@ function ReviewForm() {
 
   const onSubmit = (data) => {
     const { displayName, email } = user;
-    const review = { displayName, email, ...data };
+    const review = { displayName, email, rating, ...data };
     fetch("http://localhost:5000/reviews", {
       method: "put",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(review),
     });
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 2000);
   };
 
   return (
-    <div>
-      <h1>Review form</h1>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("rating", { required: true })} />
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Rating
+            value={rating}
+            precision={0.5}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
+            emptyIcon={
+              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+          />
+          <Typography variant="h5" sx={{ pl: 2 }}>
+            {rating}
+          </Typography>
+        </Box>
+        <TextField
+          multiline
+          rows={4}
+          sx={{ width: "50%", my: 2 }}
+          {...register("review", { required: true })}
+        />
+        <br />
         {errors.exampleRequired && <span>This field is required</span>}
-        <input {...register("review", { required: true })} />
-        {errors.exampleRequired && <span>This field is required</span>}
-        <input type="submit" />
+        <Button variant="outlined" type="submit">
+          Submit
+        </Button>
       </form>
-    </div>
+      {alert && (
+        <Alert sx={{ width: "50%", my: 2 }} severity="success">
+          Your review is successfully saved
+        </Alert>
+      )}
+    </Box>
   );
 }
 

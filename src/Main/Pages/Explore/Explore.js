@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import React, { useEffect, useState } from "react";
-import Navs from "../../Components/Navs";
 import Product from "../Home/Products/Product";
 
 function Explore() {
@@ -14,7 +13,6 @@ function Explore() {
 
   return (
     <>
-      <Navs />
       <Box sx={{ mx: 4, textAlign: "center" }}>
         <h1>This is explore</h1>
         <Grid container spacing={2}>

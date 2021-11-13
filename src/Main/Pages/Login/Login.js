@@ -4,14 +4,13 @@ import TextField from "@mui/material/TextField";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
-import Navs from "../../Components/Navs";
 import useAuth from "../../Hooks/useAuth";
 
 function Login() {
   const location = useLocation();
   const history = useHistory();
 
-  const destination = location?.state?.from || "/";
+  const destination = location?.state?.from;
 
   const {
     register,
@@ -32,7 +31,6 @@ function Login() {
 
   return (
     <>
-      <Navs />
       <Box
         sx={{
           my: 12,

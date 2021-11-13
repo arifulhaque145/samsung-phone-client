@@ -17,10 +17,6 @@ function Purchase() {
     const { displayName, email } = user;
     const { name } = purchaseData;
 
-    // fetch(`http://localhost:5000/orders?email=${email}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {});
-
     const datas = {
       itemid: id,
       item: name,

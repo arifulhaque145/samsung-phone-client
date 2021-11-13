@@ -1,11 +1,10 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import Navs from "../../Components/Navs";
 import useAuth from "../../Hooks/useAuth";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 
 function Register() {
   const {
@@ -29,7 +28,6 @@ function Register() {
 
   return (
     <>
-      <Navs />
       <Box
         sx={{
           my: 12,
@@ -110,7 +108,9 @@ function Register() {
             <p>Password must be at least 6 characters</p>
           )}
           <br />
-          <Button variant="contained" type="submit">Register</Button>
+          <Button variant="contained" type="submit">
+            Register
+          </Button>
         </form>
         <p>{err}</p>
       </Box>

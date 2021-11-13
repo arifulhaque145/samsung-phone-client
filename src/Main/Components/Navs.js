@@ -27,11 +27,13 @@ function Navs() {
               Explore
             </Typography>
           </Links>
-          {user?.email && <Links to="/dashboard">
-            <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
-              Dashboard
-            </Typography>
-          </Links>}
+          {user?.email && (
+            <Links to="/dashboard">
+              <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
+                Dashboard
+              </Typography>
+            </Links>
+          )}
           {!user?.email ? (
             <Links to="/login">
               <Button
@@ -43,7 +45,7 @@ function Navs() {
             </Links>
           ) : (
             <Links to="#">
-              <Typography variant="button" component="div" sx={{ flexGrow: 1 }}>
+              <Typography variant="button" component="div" sx={{ flexGrow: 1, mr: 2 }}>
                 {user?.displayName}
               </Typography>
             </Links>
@@ -58,15 +60,13 @@ function Navs() {
               </Button>
             </Links>
           ) : (
-            <a href="/" style={{ textDecoration: "none" }}>
-              <Button
-                onClick={logoutUser}
-                variant="contained"
-                sx={{ backgroundColor: "white", color: "blue" }}
-              >
-                Logout
-              </Button>
-            </a>
+            <Button
+              onClick={logoutUser}
+              variant="contained"
+              sx={{ backgroundColor: "white", color: "blue" }}
+            >
+              Logout
+            </Button>
           )}
         </Toolbar>
       </AppBar>

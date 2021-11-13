@@ -22,9 +22,9 @@ function AdminDash() {
         <Link to={`${url}/addproduct`}>
           <li>Add Product</li>
         </Link>
-        <a href="/">
+        <Link to="/">
           <li onClick={logoutUser}>Logout</li>
-        </a>
+        </Link>
       </ul>
     </>
   );

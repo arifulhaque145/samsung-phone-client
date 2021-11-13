@@ -26,9 +26,9 @@ function DashNavs() {
         <LinkTab to={`${url}/payment`}>
           <ListItemText primary="Payment" />
         </LinkTab>
-        <a href="/">
+        <LinkTab to="/">
           <li onClick={logoutUser}>Logout</li>
-        </a>
+        </LinkTab>
       </ListItem>
     </>
   );

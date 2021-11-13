@@ -95,7 +95,7 @@ const useFirebase = () => {
     setIsLoading(true);
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        window.location.reload(true);
       })
       .catch((error) => {
         setError(error.message);

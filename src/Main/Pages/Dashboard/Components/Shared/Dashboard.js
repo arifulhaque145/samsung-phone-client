@@ -3,7 +3,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import React from "react";
 import { Switch, useRouteMatch } from "react-router-dom";
-import Navs from "../../../../Components/Navs";
 import useAuth from "../../../../Hooks/useAuth";
 import AdminRoute from "../../../../Routes/AdminRoute";
 import PrivateRoute from "../../../../Routes/PrivateRoute";
@@ -19,45 +18,50 @@ import Review from "./Review/Review";
 
 function Dashboard() {
   let { path } = useRouteMatch();
-  const { checkUser } = useAuth();
+  const { user, isLoading } = useAuth();
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <Navs />
-      {/* <List>{checkUser?.role === "admin" ? <AdminDash /> : <DashNavs />}</List> */}
-      <Divider />
-      <List>
-        <Switch>
-          <PrivateRoute exact path={path}>
-            <DashboardHome />
-          </PrivateRoute>
-          <AdminRoute exact path={path}>
-            <AdminHome />
-          </AdminRoute>
-          <PrivateRoute path={`${path}/myorders`}>
-            <MyOrder />
-          </PrivateRoute>
-          <PrivateRoute path={`${path}/review`}>
-            <Review />
-          </PrivateRoute>
-          <PrivateRoute path={`${path}/payment`}>
-            <Payment />
-          </PrivateRoute>
-          <AdminRoute path={`${path}/allusers`}>
-            <AllUsers />
-          </AdminRoute>
-          <AdminRoute path={`${path}/allorders`}>
-            <AllOrders />
-          </AdminRoute>
-          <AdminRoute path={`${path}/addproduct`}>
-            <AddProduct />
-          </AdminRoute>
-          <AdminRoute path={`${path}/makeadmin`}>
-            <MakeAdmin />
-          </AdminRoute>
-        </Switch>
-      </List>
-    </Box>
+    <>
+      {user?.email && (
+        <Box sx={{ display: "flex" }}>
+          <Divider />
+          <List>
+            <Switch>
+              <PrivateRoute exact path={path}>
+                <DashboardHome />
+              </PrivateRoute>
+              <AdminRoute exact path={path}>
+                <AdminHome />
+              </AdminRoute>
+              <PrivateRoute path={`${path}/myorders`}>
+                <MyOrder />
+              </PrivateRoute>
+              <PrivateRoute path={`${path}/review`}>
+                <Review />
+              </PrivateRoute>
+              <PrivateRoute path={`${path}/payment`}>
+                <Payment />
+              </PrivateRoute>
+              <AdminRoute path={`${path}/allusers`}>
+                <AllUsers />
+              </AdminRoute>
+              <AdminRoute path={`${path}/allorders`}>
+                <AllOrders />
+              </AdminRoute>
+              <AdminRoute path={`${path}/addproduct`}>
+                <AddProduct />
+              </AdminRoute>
+              <AdminRoute path={`${path}/makeadmin`}>
+                <MakeAdmin />
+              </AdminRoute>
+            </Switch>
+          </List>
+        </Box>
+      )}
+    </>
   );
 }
 

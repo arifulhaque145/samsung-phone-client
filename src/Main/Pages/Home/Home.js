@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Navs from "../../Components/Navs";
-import Product from "./Products/Product";
-import ProductContainer from "./Products/ProductContainer";
+import React from "react";
+import Footer from "../../Components/Footer";
+import Banner from "./Banner/Banner";
+import Contact from "./Contact/Contact";
+import Products from "./Products/Products";
+import Review from "./Review/Review";
 
 function Home() {
-  const [product, setProduct] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, [product]);
-
   return (
     <>
-      <Navs />
-      <h1>Banner</h1>
-      <ProductContainer>
-        {product.slice(0, 6).map((item) => (
-          <Product key={item._id} data={item} />
-        ))}
-      </ProductContainer>
-      <h1>Review</h1>
-      <h1>Contact Us</h1>
-      <h1>Footer</h1>
+      <Banner />
+      <Products />
+      <Review />
+      <Contact />
+      <Footer />
     </>
   );
 }
