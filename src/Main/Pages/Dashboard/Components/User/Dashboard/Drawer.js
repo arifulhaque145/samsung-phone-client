@@ -45,66 +45,74 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <Divider />
-      <List>
-        <ListItem button onClick={() => history.push(`${path}/makeadmin`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Make Admin"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/allusers`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"All Users"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/allorders`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"All Orders"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Add Product"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Logout"} />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button onClick={() => history.push(`${path}/myorders`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"My Orders"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/review`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Review"} />
-        </ListItem>
-        <ListItem button onClick={() => history.push(`${path}/payment`)}>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Payment"} />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary={"Logout"} />
-        </ListItem>
-      </List>
+      {checkUser?.role === "admin" && (
+        <>
+          <Divider />
+          <List>
+            <ListItem button onClick={() => history.push(`${path}/makeadmin`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Make Admin"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/allusers`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"All Users"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/allorders`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"All Orders"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Product"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItem>
+          </List>
+        </>
+      )}
+      {checkUser?.role === "member" && (
+        <>
+          <Divider />
+          <List>
+            <ListItem button onClick={() => history.push(`${path}/myorders`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"My Orders"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/review`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Review"} />
+            </ListItem>
+            <ListItem button onClick={() => history.push(`${path}/payment`)}>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Payment"} />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Logout"} />
+            </ListItem>
+          </List>
+        </>
+      )}
     </div>
   );
 

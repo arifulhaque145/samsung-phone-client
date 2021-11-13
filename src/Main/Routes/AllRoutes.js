@@ -20,7 +20,6 @@ function AllRoutes() {
         </Route>
         <PrivateRoute path="/dashboard">
           <ResponsiveDrawer />
-          {/* <Dashboard /> */}
         </PrivateRoute>
         <Route path="/explore">
           <Explore />
