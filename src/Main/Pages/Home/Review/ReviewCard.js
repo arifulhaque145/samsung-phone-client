@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import StarIcon from "@mui/icons-material/Star";
 
 function ReviewCard({ data }) {
   const { displayName, rating, review } = data;
@@ -21,7 +22,15 @@ function ReviewCard({ data }) {
           >
             {displayName}
           </Typography>
-          <Rating name="read-only" sx={{ my: 2 }} value={rating} readOnly />
+          <Rating
+            name="text-feedback"
+            value={rating}
+            readOnly
+            precision={0.5}
+            emptyIcon={
+              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+          />
           <Typography variant="body2" color="text.secondary">
             {review}
           </Typography>

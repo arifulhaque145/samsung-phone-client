@@ -1,4 +1,8 @@
-import MailIcon from "@mui/icons-material/Mail";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -23,10 +27,14 @@ const drawerWidth = 240;
 
 function AdminDrawer(props) {
   let { path } = useRouteMatch();
-  const { logoutUser } = useAuth();
+  const { logoutUser, isLoading } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const history = useHistory();
+
+  if (isLoading) {
+    return <p></p>;
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,39 +43,39 @@ function AdminDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
-          <Divider />
-          <List>
-            <ListItem button onClick={() => history.push(`${path}/makeadmin`)}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Make Admin"} />
-            </ListItem>
-            <ListItem button onClick={() => history.push(`${path}/allusers`)}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"All Users"} />
-            </ListItem>
-            <ListItem button onClick={() => history.push(`${path}/allorders`)}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"All Orders"} />
-            </ListItem>
-            <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Add Product"} />
-            </ListItem>
-            <ListItem button onClick={logoutUser}>
-              <ListItemIcon>
-                <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Logout"} />
-            </ListItem>
-          </List>
+      <Divider />
+      <List>
+        <ListItem button onClick={() => history.push(`${path}/makeadmin`)}>
+          <ListItemIcon>
+            <AdminPanelSettingsIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Make Admin"} />
+        </ListItem>
+        <ListItem button onClick={() => history.push(`${path}/allusers`)}>
+          <ListItemIcon>
+            <PeopleAltIcon />
+          </ListItemIcon>
+          <ListItemText primary={"All Users"} />
+        </ListItem>
+        <ListItem button onClick={() => history.push(`${path}/allorders`)}>
+          <ListItemIcon>
+            <BookmarkBorderIcon />
+          </ListItemIcon>
+          <ListItemText primary={"All Orders"} />
+        </ListItem>
+        <ListItem button onClick={() => history.push(`${path}/addproduct`)}>
+          <ListItemIcon>
+            <ProductionQuantityLimitsIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Add Product"} />
+        </ListItem>
+        <ListItem button onClick={logoutUser}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Logout"} />
+        </ListItem>
+      </List>
     </div>
   );
 

@@ -8,9 +8,9 @@ function Contact() {
     <Box
       sx={{
         textAlign: "center",
-        width: "50%",
+        width: { lg: "50%" },
         mx: "auto",
-        p: 2,
+        p: { lg: 2, xs: 3 },
         bgcolor: "background.paper",
       }}
     >

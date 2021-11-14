@@ -19,6 +19,7 @@ const useFirebase = () => {
   const [checkUser, setCheckUser] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [alert, setAlert] = useState("");
 
   // Auth
   const auth = getAuth();
@@ -37,8 +38,7 @@ const useFirebase = () => {
           (user.password = ""),
           "put"
         );
-
-        const destination = location?.state?.from || "/";
+        const destination = location?.state?.from || "/dashboard";
         history.replace(destination);
       })
       .catch((error) => {
@@ -49,7 +49,7 @@ const useFirebase = () => {
   };
 
   // EMAIL PASSWORD AUTH
-  const registerAccount = (name, email, password, history) => {
+  const registerAccount = (name, email, password, history, location) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
@@ -62,10 +62,14 @@ const useFirebase = () => {
           newUser.password,
           "put"
         );
+        
         updateProfile(auth.currentUser, {
           displayName: name,
         });
-        history.push("/login");
+        setAlert("Account successfully created");
+        // const destination = location?.state?.from || "/";
+        history.replace("/");
+        window.location.reload(true);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -75,11 +79,19 @@ const useFirebase = () => {
   };
 
   // LOGIN USER
-  const loginUser = (email, password) => {
+  const loginUser = (email, password, location, history) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUser(userCredential.user);
+        setAlert("Successfully Logged In");
+        const destination = location?.state?.from || "/dashboard";
+        if (email === "admin@admin.com") {
+          history.replace("/dashboard");
+        } else {
+          history.replace(destination);
+        }
+        window.location.reload(true);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -143,6 +155,7 @@ const useFirebase = () => {
     logoutUser,
     deleteNewUser,
     checkUser,
+    alert,
   };
 };
 

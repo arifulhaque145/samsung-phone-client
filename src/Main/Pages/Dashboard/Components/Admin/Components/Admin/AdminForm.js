@@ -14,8 +14,6 @@ function AdminForm({ newData }) {
       body: JSON.stringify(data),
     });
 
-    console.log(data, _id);
-
     setAlert(true);
     setTimeout(() => {
       setAlert(false);
@@ -58,9 +56,8 @@ function AdminForm({ newData }) {
         </Grid>
         <Grid xs={2} sm={4} md={3} sx={{ my: 1 }}>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Select defaultValue="member" {...register("role")}>
+            <Select defaultValue="admin" {...register("role")}>
               <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="member">Member</MenuItem>
             </Select>
             <Button type="submit">Submit</Button>
           </form>

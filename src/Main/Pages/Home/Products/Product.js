@@ -10,14 +10,20 @@ function Product({ data }) {
   const { _id, name, price, img } = data;
 
   return (
-    <Card sx={{ width: 300, m: 2, textAlign: "center" }}>
+    <Card
+      sx={{
+        width: { lg: 300, xs: 350 },
+        m: 2,
+        textAlign: "center",
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
           image={img}
           alt="green iguana"
-          sx={{py: 2}}
+          sx={{ py: 2 }}
         />
         <CardContent>
           <Typography

@@ -1,9 +1,10 @@
+import { Alert } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 function Register() {
@@ -14,8 +15,9 @@ function Register() {
   } = useForm();
 
   const [err, setErr] = useState("");
+  const loaction = useLocation();
   const history = useHistory();
-  const { registerAccount } = useAuth();
+  const { registerAccount, alert, error } = useAuth();
 
   const onSubmit = (data) => {
     const { name, email, password, password2 } = data;
@@ -23,7 +25,7 @@ function Register() {
       setErr("Password Mismatched");
       return;
     }
-    registerAccount(name, email, password, history);
+    registerAccount(name, email, password, history, loaction);
   };
 
   return (
@@ -48,10 +50,12 @@ function Register() {
           />
           <br />
           {errors?.name?.type === "required" && (
-            <span>This field is required</span>
+            <span style={{ color: "red" }}>This field is required</span>
           )}
           {errors?.name?.type === "maxLength" && (
-            <p>First name cannot exceed 20 characters</p>
+            <p style={{ color: "red" }}>
+              First name cannot exceed 20 characters
+            </p>
           )}
           <br />
           <TextField
@@ -66,9 +70,11 @@ function Register() {
           />
           <br />
           {errors?.email?.type === "required" && (
-            <span>This field is required</span>
+            <span style={{ color: "red" }}>This field is required</span>
           )}
-          {errors?.email?.type === "pattern" && <p>Enter a valid email</p>}
+          {errors?.email?.type === "pattern" && (
+            <p style={{ color: "red" }}>Enter a valid email</p>
+          )}
           <br />
           <TextField
             label="Password"
@@ -83,10 +89,12 @@ function Register() {
           />
           <br />
           {errors?.password?.type === "required" && (
-            <span>This field is required</span>
+            <span style={{ color: "red" }}>This field is required</span>
           )}
           {errors?.password?.type === "minLength" && (
-            <p>Password must be at least 6 characters</p>
+            <p style={{ color: "red" }}>
+              Password must be at least 6 characters
+            </p>
           )}
           <br />
           <TextField
@@ -102,17 +110,28 @@ function Register() {
           />
           <br />
           {errors?.password2?.type === "required" && (
-            <span>This field is required</span>
+            <span style={{ color: "red" }}>This field is required</span>
           )}
           {errors?.password2?.type === "minLength" && (
-            <p>Password must be at least 6 characters</p>
+            <p style={{ color: "red" }}>
+              Password must be at least 6 characters
+            </p>
           )}
-          <br />
-          <Button variant="contained" type="submit">
+          <p style={{ color: "red" }}>{err}</p>
+          <Button variant="contained" type="submit" sx={{ my: 2 }}>
             Register
           </Button>
         </form>
-        <p>{err}</p>
+        {alert.length !== 0 && (
+          <Alert severity="success" sx={{ my: 5 }}>
+            {alert}
+          </Alert>
+        )}
+        {error.length !== 0 && (
+          <Alert severity="error" sx={{ my: 5 }}>
+            {error}
+          </Alert>
+        )}
       </Box>
     </>
   );

@@ -1,3 +1,5 @@
+import { CircularProgress } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navs from "../Components/Navs";
@@ -16,7 +18,11 @@ function AllRoutes() {
   // const [value, setValue] = React.useState({});
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", my: 20 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

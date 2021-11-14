@@ -1,4 +1,7 @@
-import MailIcon from "@mui/icons-material/Mail";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PaymentIcon from "@mui/icons-material/Payment";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,11 +17,6 @@ import * as React from "react";
 import { Switch, useHistory, useRouteMatch } from "react-router-dom";
 import useAuth from "../../../../../Hooks/useAuth";
 import PrivateRoute from "../../../../../Routes/PrivateRoute";
-import AdminHome from "../../Admin/AdminHome";
-import AddProduct from "../../Admin/Components/AddProduct";
-import AllOrders from "../../Admin/Components/AllOrders";
-import AllUsers from "../../Admin/Components/AllUsers";
-import MakeAdmin from "../../Admin/Components/MakeAdmin";
 import Payment from "../../Shared/Payment";
 import Review from "../../Shared/Review/Review";
 import MyOrder from "../../User/Order/MyOrder";
@@ -28,7 +26,7 @@ const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   let { path } = useRouteMatch();
-  const { checkUser, isLoading, logoutUser } = useAuth();
+  const { isLoading, logoutUser } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const history = useHistory();
@@ -59,25 +57,25 @@ function ResponsiveDrawer(props) {
       <List>
         <ListItem button onClick={() => history.push(`${path}/myorders`)}>
           <ListItemIcon>
-            <MailIcon />
+            <BookmarkBorderIcon />
           </ListItemIcon>
           <ListItemText primary={"My Orders"} />
         </ListItem>
         <ListItem button onClick={() => history.push(`${path}/review`)}>
           <ListItemIcon>
-            <MailIcon />
+            <ReviewsIcon />
           </ListItemIcon>
           <ListItemText primary={"Review"} />
         </ListItem>
         <ListItem button onClick={() => history.push(`${path}/payment`)}>
           <ListItemIcon>
-            <MailIcon />
+            <PaymentIcon />
           </ListItemIcon>
           <ListItemText primary={"Payment"} />
         </ListItem>
         <ListItem button onClick={logoutUser}>
           <ListItemIcon>
-            <MailIcon />
+            <LogoutIcon />
           </ListItemIcon>
           <ListItemText primary={"Logout"} />
         </ListItem>
@@ -93,7 +91,10 @@ function ResponsiveDrawer(props) {
       <CssBaseline />
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} // todo zindex
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+        }} // todo zindex
         aria-label="mailbox folders"
       >
         <Drawer

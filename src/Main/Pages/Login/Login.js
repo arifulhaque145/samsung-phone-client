@@ -1,3 +1,4 @@
+import { Alert, CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,7 +9,7 @@ import useAuth from "../../Hooks/useAuth";
 
 function Login() {
   const location = useLocation();
-  const history = useHistory()
+  const history = useHistory();
 
   const {
     register,
@@ -16,16 +17,21 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const { googleAccount, loginUser } = useAuth();
+  const { googleAccount, loginUser, alert, error, isLoading } = useAuth();
 
   const onSubmit = (data) => {
-    loginUser(data.email, data.password);
-    history.push("/");
+    setTimeout(() => {
+      loginUser(data.email, data.password, location, history);
+    }, 2000);
   };
 
   const googleSignIn = () => {
     googleAccount(location, history);
   };
+
+  if(isLoading){
+    return <CircularProgress />;
+  }
 
   return (
     <>
@@ -85,6 +91,16 @@ function Login() {
         <Button variant="contained" onClick={googleSignIn}>
           Google Signin
         </Button>
+        {alert.length !== 0 && (
+          <Alert severity="success" sx={{ my: 5 }}>
+            {alert}
+          </Alert>
+        )}
+        {error.length !== 0 && (
+          <Alert severity="error" sx={{ my: 5 }}>
+            {error}
+          </Alert>
+        )}
       </Box>
     </>
   );

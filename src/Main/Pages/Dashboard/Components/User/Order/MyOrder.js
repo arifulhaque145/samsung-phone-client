@@ -17,7 +17,7 @@ function MyOrder() {
 
   return (
     <Box>
-      <h1>My Orders</h1>
+      <h1>Total Orders: {orders.length}</h1>
       {orders.map((item) => (
         <Order key={item._id} data={item} />
       ))}
